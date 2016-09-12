@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #151515;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+main {
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 4px;
+    color: white;
+}
+
+h1 {
+    font-size: 64px;
+}
+
+h1:last-of-type {
+    margin-top: 25px;
+    margin-bottom: 45px;
+}
+
+h1 > img {
+    width: 90px;
+    margin: -10px;
+    top: 20px;
+    position: relative;
+}
+
+location, temperature, weather {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+location {
+    display: block;
+}
+
+temperature {
+    display: inline-block;
+}
+
+weather {
+    display: block;
+    margin-bottom: 50px;
+}
+
+button {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    background-color: inherit;
+    font: inherit;
+    font-size: 24px;
+    color: #4c67ce;
+}
+
+button:hover {
+    color: #2c47be;
+}
+
+footer {
+    font-size: 14px;
+    margin-top: 20px;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: #4c67ce;
+}
+
+a:visited {
+    color: #4c67ce;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #2c47be;
+}
+
+a:focus {
+    color: #4c67ce;
+    text-decoration: none;
+}
+
+.sun {
+    width: 30px;
+    height: 30px;
+    border: 4px white solid;
+    display: block;
+    border-radius: 50%;
+    background-color: #151515;
+    z-index: 2;
+    margin: auto;
+    position: relative;
+}
+
+.mask {
+    width: 38px;
+    height: 38px;
+    display: block;
+    border-radius: 50%;
+    background-color: #151515;
+    margin: auto;
+    position: relative;
+    top: -34px;
+    left: 0px;
+    z-index: 1;
+}
+
+@keyframes test {
+    to {transform: rotate(360deg);}
+}
+
+.rays-rotater {
+    animation: test 8s linear infinite;
+    position: relative;
+    margin: auto;
+    top: -73px;
+    height: 40px;
+    width: 40px;
+}
+
+.rays {
+    width: 80px;
+    border: 2px white solid;
+    display: block;
+    margin: auto;
+    position: relative;
+    border-radius: 20px;
+    left: -20px;
+}
+
+.ray1 {
+    top: 18px;
+}
+
+.ray2 {
+    top: 14px;
+    transform: rotate(120deg);
+}
+
+.ray3 {
+    top: 10px;
+    transform: rotate(60deg);
+}
