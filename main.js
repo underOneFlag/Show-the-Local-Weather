@@ -1,11 +1,11 @@
 const _uOF = {};
 
-_uOF.getWeatherData = (lat, lon, cb) => {
+_uOF.getWeatherData = (coords, cb) => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => cb(null, xhr.responseText);
   xhr.onerror = (err) => cb(err);
   xhr.open('POST', 'https://ring-panther.hyperdev.space/');
-  xhr.send(JSON.stringify({'lat': lat, 'lon': lon}));
+  xhr.send(JSON.stringify(coords));
 };
 
 _uOF.getWeather = () => {
@@ -13,14 +13,16 @@ _uOF.getWeather = () => {
 		console.log('no geolocation data');
 
 	const pos = navigator.geolocation.getCurrentPosition((pos) => {
-		console.log(pos);
-		_uOF.getWeatherData(pos.latitude, pos.longitude, (err, data) => {
+		const coords = {
+			'lat': pos.coords.latitude,
+			'lon': pos.coords.longitude
+		};
+
+		_uOF.getWeatherData(coords, (err, data) => {
 			if(err) return console.log(err);
 			console.log(data);
 		});
-	}, (err) => {
-		console.log(err);
-	}, {'timeout':5000});
+	}, (err) => console.log(err), {'timeout':5000});
 };
 
 _uOF.weather = {
