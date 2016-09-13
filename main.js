@@ -1,33 +1,25 @@
 const _uOF = {};
 
-_uOF.getWeatherData = function blue(lat, lon, cb) {
-	const url = 'http://api.openweathermap.org/data/2.5/weather?' + 
-							'lat=' + lat + '&lon=' + lon + '&callback=test';
-	// const url = 'http://www.openweathermap.org';
-  // const url = 'http://www.google.com/';
+_uOF.getWeatherData = (lat, lon, cb) => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => cb(null, xhr.responseText);
   xhr.onerror = (err) => cb(err);
-  xhr.open('GET', url);
-  // xhr.setRequestHeader("Accept", "application/json");
-  xhr.send();
+  xhr.open('POST', 'https://ring-panther.hyperdev.space/');
+  xhr.send(JSON.stringify({'lat': lat, 'lon': lon}));
 };
 
-_uOF.getWeather = function red() {
+_uOF.getWeather = () => {
 	if(!navigator.geolocation)
 		console.log('no geolocation data');
 
-	const pos = navigator.geolocation.getCurrentPosition(function green(pos) {
+	const pos = navigator.geolocation.getCurrentPosition((pos) => {
 		console.log(pos);
-		_uOF.getWeatherData(pos.latitude, pos.longitude, function g(err, data) {
+		_uOF.getWeatherData(pos.latitude, pos.longitude, (err, data) => {
 			if(err) return console.log(err);
-			cnosole.log(data);
+			console.log(data);
 		});
 	}, (err) => {
 		console.log(err);
-		_uOF.getWeatherData(-122, 45, (err, data) => {
-			console.log(err||data);
-		});
 	}, {'timeout':5000});
 };
 
