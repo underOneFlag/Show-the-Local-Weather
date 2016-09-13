@@ -1,12 +1,56 @@
 const _uOF = {};
 
+_uOF.fTemp = null;
+_uOF.cTemp = null;
+
+_uOF.weatherAnimation = {
+	'Thunderstorm': ['Clear', 0],
+	'Drizzle': ['Overcast', 1],
+	'Rain': ['Snowing', 2],
+	'Snow': ['Raining', 3],
+	'Clear': ['Stormy', 4],
+	'Clouds': ['Drizzling', 5]
+};
+
 _uOF.getWeatherData = (coords, cb) => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => cb(null, xhr.responseText);
   xhr.onerror = (err) => cb(err);
-  xhr.open('POST', 'https://ring-panther.hyperdev.space/');
+  xhr.open('POST', 'https://ring-panther.hyperdev.space');
   xhr.send(JSON.stringify(coords));
 };
+
+_uOF.setWeather = (data) => {
+	fTemp = Math.round(data.main.temp * 9.0 / 5.0 - 459.67);
+	cTemp = Math.round(data.main.temp - 273.15);
+
+	document.querySelector('location').
+		textContent = data.name + ', ' + data.sys.country;
+
+	switchTemp();
+
+	document.querySelector('weather').			
+		textContent = data.weather[0].main;
+
+	document.querySelector('animation').
+		classList.add(_uOF.weatherAnimation[data.weather[0].main]);
+};
+
+_uOF.switchTemp = () => {
+	const degreesElement = document.querySelector('temperature');
+	const cfElement = document.querySelector('button');
+
+	if(cfElement.textContent == 'F') {
+		degreesElement.textContent = _uOF.cTemp + '°';
+		cfElement.textContent = 'C';
+	}
+	else {
+		degreesElement.textContent = _uOF.fTemp + '°';
+		cfElement.textContent = 'F';
+	}
+};
+
+document.querySelector('button').onclick = (e) => switchTemp();
 
 _uOF.getWeather = () => {
 	if(!navigator.geolocation)
@@ -23,31 +67,6 @@ _uOF.getWeather = () => {
 			console.log(data);
 		});
 	}, (err) => console.log(err), {'timeout':5000});
-};
-
-_uOF.weather = {
-	'clear': ['Clear', 0],
-	'overcast': ['Overcast', 1],
-	'snowing': ['Snowing', 2],
-	'raining': ['Raining', 3],
-	'stormy': ['Stormy', 4],
-	'light-rain': ['Drizzling', 5]
-};
-
-_uOF.switchTemp = (deg, cf) => {
-	deg = Number(deg);
-	if(cf == 'C')
-		return Math.round(deg * 9 / 5 + 32) + '°';
-	else
-		return Math.round((deg - 32) * 5 / 9) + '°';
-};
-
-document.querySelector('button').onclick = (e) => {
-	_uOF.cf = e.target.textContent;
-	const degreesElement = e.target.previousElementSibling;
-	const degrees = degreesElement.textContent.match(/\d+/)[0];
-	degreesElement.textContent = _uOF.switchTemp(degrees, _uOF.cf);
-	e.target.textContent = _uOF.cf == 'C' ? 'F' : 'C';
 };
 
 _uOF.getWeather();
