@@ -65,6 +65,7 @@ _uOF.getWeather = () => {
 		_uOF.getWeatherData(coords, (err, data) => {
 			if(err) return console.log(err);
 			console.log(data);
+			_uOF.setWeather(data);
 		});
 	}, (err) => console.log(err), {'timeout':5000});
 };
