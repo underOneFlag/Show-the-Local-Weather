@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 327.633 327.633" style="fill:grey; enable-background:new 0 0 327.633 327.633;" xml:space="preserve">
+	<defs>
+    <style type="text/css"><![CDATA[
+    	@keyframes color-flare {
+    		0% { fill: #00ccff; }
+    		33% { fill: grey; }
+    		100% { fill: #00ccff; }
+    	}
+    	@keyframes color-flare2 {
+    		0% { fill: grey; }
+    		66% { fill: #00ccff; }
+    		100% { fill: grey; }
+    	}
+      path {
+      	animation: color-flare 4s linear infinite;
+      }
+      #r2, #r4 {
+      	animation: color-flare2 4s infinite;
+      }
+    ]]></style>
+  </defs>
+<g>
+	<path id="r1" d="M201.321,120.695c7.456-22.437-19.198-67.631-19.198-67.631s-48.434,20.201-55.933,42.639
+		c-7.457,22.43,3.297,46.218,24.042,53.13C170.978,155.744,193.867,143.132,201.321,120.695z"/>
+	<path id="r2" d="M53.019,219.544c-7.451,22.438,3.302,46.241,24.049,53.14c20.747,6.885,43.625-5.682,51.089-28.125
+		c7.446-22.439-19.205-67.644-19.205-67.644S60.478,197.106,53.019,219.544z"/>
+	<path id="r3" d="M176.889,219.544c-7.496,22.438,3.291,46.241,24.006,53.14c20.743,6.885,43.625-5.682,51.091-28.125
+		c7.487-22.439-19.211-67.644-19.211-67.644S184.348,197.106,176.889,219.544z"/>
+	<path id="r4" d="M307.113,53.064c0,0-48.474,20.201-55.929,42.639c-7.457,22.43,3.302,46.218,24.047,53.13
+		c20.744,6.911,43.589-5.701,51.087-28.138C333.768,98.259,307.113,53.064,307.113,53.064z"/>
+</g>
+</svg>

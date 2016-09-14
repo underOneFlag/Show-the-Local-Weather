@@ -20,10 +20,15 @@ main {
     margin: auto;
     border-radius: 4px;
     color: white;
+    padding-top: 10px;
 }
 
 h1 {
     font-size: 64px;
+}
+
+span {
+    display: inline-block;
 }
 
 h1:last-of-type {
@@ -31,7 +36,7 @@ h1:last-of-type {
     margin-bottom: 45px;
 }
 
-h1 > img {
+img {
     width: 90px;
     margin: -10px;
     top: 20px;
@@ -57,20 +62,32 @@ weather {
 }
 
 .icon {
-    width: 65px;
-    height: 65px;
+    width: 80px;
+    height: 80px;
     margin: auto;
     display: block;
     background-size: cover;
+    margin-top: -20px;
+    margin-bottom: 35px;
+}
+
+.icon-loading {
+    background-image: url('images/loading.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .icon-sun {
-    background-image: url('sun.svg');
+    background-image: url('images/sun.svg');
     animation: spin 10s linear infinite;
 }
 
 .icon-cloud, .icon-drizzle, .icon-rain, .icon-storm, .icon-snow {
-    background-image: url('cloud.svg');
+    background-image: url('images/cloud.svg');
+}
+
+.icon-loading > cover, .icon-sun > cover, .icon-cloud > cover {
+    display: none;
 }
 
 @keyframes cloud-shift {
@@ -80,68 +97,99 @@ weather {
 
 }
 
-.icon-cloud::after {
+.icon-cloud::after, .icon-drizzle::before, 
+.icon-drizzle::after, .icon-rain::after, 
+.icon-storm::after {
     content: "";
     position: absolute;
     width: 30px;
     height: 30px;
-    background-image: url('cloud.svg');
+}
+
+.icon-cloud::after {
+    background-image: url('images/cloud.svg');
     animation: cloud-shift 5s linear infinite;
 }
 
 .icon-drizzle::before {
-    content: "";
     width: 40px;
     height: 40px;
-    position: absolute;
-    background-image: url('sun.svg');
+    background-image: url('images/sun.svg');
     animation: spin 10s linear infinite;
 }
 
 .icon-drizzle::after, .icon-rain::after {
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-image: url('raindrops.svg');
-    margin-top: 35px;
-    margin-left: -16px;
-    background-color: #151515;
+    background-image: url('images/raindrops.svg');
+    margin-top: 48px;
+    margin-left: -15px;
     background-position-x: -2px;
 }
 
-.icon-storm::after, .icon-snow::after {
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-image: url('lightning.svg');
-    margin-top: 35px;
-    margin-left: -16px;
-    background-color: #151515;
+.icon-storm::after {
+    background-image: url('images/lightning.svg');
+    margin-top: 48px;
+    margin-left: -15px;
     background-position-x: -2px;
     background-size: contain;
     background-position: 5px 0px;
     background-repeat: no-repeat;
 }
+
+@keyframes fade {
+    0% { color: #444; }
+    50% { color: white; }
+    100% { color: #444; }
+}
+
+.icon-snow::before, .icon-snow::after , 
+.icon-snow > cover::before, .icon-snow > cover::after {
+    content: "\2744";
+    position: absolute;
+}
+
+.icon-snow::before {
+    animation: 10s linear infinite;
+    font-size: 8px;
+    margin: 48px 0 0 -8px;
+    z-index: 1;
+    animation-name: spin, fade;
+    line-height: 8px;
+}
+
+.icon-snow::after {
+    font-size: 10px;
+    margin: 50px 0 0 1px;
+    animation: 10s infinite reverse;
+    animation-name: spin, fade;
+    line-height: 10px;
+}
+
+cover {
+    width: 30px;
+    height: 10px;
+    position: absolute;
+    background-color: #151515;
+    margin: 55px 0 0 -15px;
+}
+
+.icon-snow > cover::before {
+    font-size: 12px;
+    margin: 2px 0 0 -11px;
+    animation: 10s infinite reverse;
+    animation-name: spin, fade;
+    line-height: 12px;
+}
+
+.icon-snow > cover::after {
+    font-size: 16px;
+    margin: 5px 0 0 -1px;
+    animation: 10s linear infinite;
+    animation-name: spin, fade;
+    line-height: 16px;
 }
 
 @keyframes spin {
     to {transform: rotate(360deg);}
-}
-
-img {
-    width: 70px;
-    margin-bottom: 40px;
-}
-
-.sunny {
-    width: 70px;
-    animation: spin 8s linear infinite;
-}
-
-.cloudy {
-    width: 120px;
 }
 
 button {
@@ -160,14 +208,11 @@ button:hover {
     color: #2c47be;
 }
 
-button::after {
-    content: "\2744";
-    animation: spin 8s linear infinite;
-}
-
 footer {
     font-size: 14px;
     color: white;
+    max-width: 400px;
+    margin: auto;
 }
 
 a {
@@ -187,66 +232,4 @@ a:hover {
 a:focus {
     color: #4c67ce;
     text-decoration: none;
-}
-
-.sun {
-    width: 30px;
-    height: 30px;
-    border: 4px white solid;
-    display: block;
-    border-radius: 50%;
-    background-color: #151515;
-    z-index: 2;
-    margin: auto;
-    position: relative;
-}
-
-.mask {
-    width: 38px;
-    height: 38px;
-    display: block;
-    border-radius: 50%;
-    background-color: #151515;
-    margin: auto;
-    position: relative;
-    top: -34px;
-    left: 0px;
-    z-index: 1;
-}
-
-@keyframes test {
-    to {transform: rotate(360deg);}
-}
-
-.rays-rotater {
-    animation: test 8s linear infinite;
-    position: relative;
-    margin: auto;
-    top: -73px;
-    height: 40px;
-    width: 40px;
-}
-
-.rays {
-    width: 80px;
-    border: 2px white solid;
-    display: block;
-    margin: auto;
-    position: relative;
-    border-radius: 20px;
-    left: -20px;
-}
-
-.ray1 {
-    top: 18px;
-}
-
-.ray2 {
-    top: 14px;
-    transform: rotate(120deg);
-}
-
-.ray3 {
-    top: 10px;
-    transform: rotate(60deg);
 }

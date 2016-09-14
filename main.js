@@ -4,12 +4,12 @@ _uOF.fTemp = null;
 _uOF.cTemp = null;
 
 _uOF.weatherAnimation = {
-	'Thunderstorm': ['Clear', 0],
-	'Drizzle': ['Overcast', 1],
-	'Rain': ['Snowing', 2],
-	'Snow': ['Raining', 3],
-	'Clear': ['Stormy', 4],
-	'Clouds': ['Drizzling', 5]
+	'Thunderstorm': 'icon-storm',
+	'Drizzle': 'icon-drizzle',
+	'Rain': 'icon-rain',
+	'Snow': 'icon-snow',
+	'Clear': 'icon-sun',
+	'Clouds': 'icon-cloud'
 };
 
 _uOF.getWeatherData = (coords, cb) => {
@@ -47,8 +47,9 @@ _uOF.setWeather = (data) => {
 	document.querySelector('weather').			
 		textContent = data.weather[0].main;
 
-	document.querySelector('animation').
-		classList.add(_uOF.weatherAnimation[data.weather[0].main]);
+	const icon = document.querySelector('icon');
+	icon.classList.remove('icon-loading');
+	icon.classList.add(_uOF.weatherAnimation[data.weather[0].main]);
 };
 
 document.querySelector('button').onclick = (e) => _uOF.switchTemp();
@@ -70,4 +71,4 @@ _uOF.getWeather = () => {
 	}, (err) => console.log(err), {'timeout':5000});
 };
 
-// _uOF.getWeather();
+_uOF.getWeather();
