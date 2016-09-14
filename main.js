@@ -13,27 +13,12 @@ _uOF.weatherAnimation = {
 };
 
 _uOF.getWeatherData = (coords, cb) => {
+	console.log(coords);
   const xhr = new XMLHttpRequest();
   xhr.onload = () => cb(null, xhr.responseText);
   xhr.onerror = (err) => cb(err);
   xhr.open('POST', 'https://ring-panther.hyperdev.space');
   xhr.send(JSON.stringify(coords));
-};
-
-_uOF.setWeather = (data) => {
-	fTemp = Math.round(data.main.temp * 9.0 / 5.0 - 459.67);
-	cTemp = Math.round(data.main.temp - 273.15);
-
-	document.querySelector('location').
-		textContent = data.name + ', ' + data.sys.country;
-
-	switchTemp();
-
-	document.querySelector('weather').			
-		textContent = data.weather[0].main;
-
-	document.querySelector('animation').
-		classList.add(_uOF.weatherAnimation[data.weather[0].main]);
 };
 
 _uOF.switchTemp = () => {
@@ -50,7 +35,23 @@ _uOF.switchTemp = () => {
 	}
 };
 
-document.querySelector('button').onclick = (e) => switchTemp();
+_uOF.setWeather = (data) => {
+	_uOF.fTemp = Math.round(data.main.temp * 9.0 / 5.0 - 459.67);
+	_uOF.cTemp = Math.round(data.main.temp - 273.15);
+
+	document.querySelector('location').
+		textContent = data.name + ', ' + data.sys.country;
+
+	_uOF.switchTemp();
+
+	document.querySelector('weather').			
+		textContent = data.weather[0].main;
+
+	document.querySelector('animation').
+		classList.add(_uOF.weatherAnimation[data.weather[0].main]);
+};
+
+document.querySelector('button').onclick = (e) => _uOF.switchTemp();
 
 _uOF.getWeather = () => {
 	if(!navigator.geolocation)
@@ -64,10 +65,9 @@ _uOF.getWeather = () => {
 
 		_uOF.getWeatherData(coords, (err, data) => {
 			if(err) return console.log(err);
-			console.log(data);
-			_uOF.setWeather(data);
+			_uOF.setWeather(JSON.parse(data));
 		});
 	}, (err) => console.log(err), {'timeout':5000});
 };
 
-_uOF.getWeather();
+// _uOF.getWeather();

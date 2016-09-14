@@ -18,7 +18,6 @@ body {
 main {
     width: 100%;
     margin: auto;
-    margin-top: 10px;
     border-radius: 4px;
     color: white;
 }
@@ -57,6 +56,94 @@ weather {
     margin-bottom: 50px;
 }
 
+.icon {
+    width: 65px;
+    height: 65px;
+    margin: auto;
+    display: block;
+    background-size: cover;
+}
+
+.icon-sun {
+    background-image: url('sun.svg');
+    animation: spin 10s linear infinite;
+}
+
+.icon-cloud, .icon-drizzle, .icon-rain, .icon-storm, .icon-snow {
+    background-image: url('cloud.svg');
+}
+
+@keyframes cloud-shift {
+    0%    { opacity: 0;  margin-left: 15px; }
+    50%   { opacity: 1;  }
+    100%  { opacity: 0;  margin-left: -50px; }
+
+}
+
+.icon-cloud::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('cloud.svg');
+    animation: cloud-shift 5s linear infinite;
+}
+
+.icon-drizzle::before {
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-image: url('sun.svg');
+    animation: spin 10s linear infinite;
+}
+
+.icon-drizzle::after, .icon-rain::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('raindrops.svg');
+    margin-top: 35px;
+    margin-left: -16px;
+    background-color: #151515;
+    background-position-x: -2px;
+}
+
+.icon-storm::after, .icon-snow::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('lightning.svg');
+    margin-top: 35px;
+    margin-left: -16px;
+    background-color: #151515;
+    background-position-x: -2px;
+    background-size: contain;
+    background-position: 5px 0px;
+    background-repeat: no-repeat;
+}
+}
+
+@keyframes spin {
+    to {transform: rotate(360deg);}
+}
+
+img {
+    width: 70px;
+    margin-bottom: 40px;
+}
+
+.sunny {
+    width: 70px;
+    animation: spin 8s linear infinite;
+}
+
+.cloudy {
+    width: 120px;
+}
+
 button {
     display: inline-block;
     cursor: pointer;
@@ -73,9 +160,13 @@ button:hover {
     color: #2c47be;
 }
 
+button::after {
+    content: "\2744";
+    animation: spin 8s linear infinite;
+}
+
 footer {
     font-size: 14px;
-    margin-top: 20px;
     color: white;
 }
 
