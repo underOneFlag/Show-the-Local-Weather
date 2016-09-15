@@ -48,8 +48,17 @@ _uOF.setWeather = (data) => {
 		textContent = data.weather[0].main;
 
 	const icon = document.querySelector('icon');
+	const weatherType = _uOF.weatherAnimation[data.weather[0].main];
+
 	icon.classList.remove('icon-loading');
-	icon.classList.add(_uOF.weatherAnimation[data.weather[0].main]);
+
+	if(weatherType !== undefined && weatherType !== 'undefined') {
+		icon.classList.add(weatherType);
+	}
+	else if(data.weather[0].icon) {
+		icon.innerHTML = '<img src="http://openweathermap.org/img/w/' +
+										  data.weather[0].icon + '.png"/>';
+	}
 };
 
 document.querySelector('button').onclick = (e) => _uOF.switchTemp();
